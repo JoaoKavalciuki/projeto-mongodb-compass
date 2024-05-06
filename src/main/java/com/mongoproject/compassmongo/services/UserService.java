@@ -37,4 +37,10 @@ public class UserService {
         }
         throw new ObjectNotFoundException("Objeto não encontrado");
     }
+
+    public User insert(UserDTO dto){
+        User newUser = new User(dto.name(), dto.email());
+
+        return userRepository.insert(newUser);
+    }
 }
