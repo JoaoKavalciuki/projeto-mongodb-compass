@@ -1,6 +1,8 @@
 package com.mongoproject.compassmongo.services;
 
+import com.mongoproject.compassmongo.domain.Post;
 import com.mongoproject.compassmongo.domain.User;
+import com.mongoproject.compassmongo.dto.PostsDTO;
 import com.mongoproject.compassmongo.dto.UserDTO;
 import com.mongoproject.compassmongo.repositories.UserRepository;
 import com.mongoproject.compassmongo.services.exceptions.ObjectNotFoundException;
@@ -60,6 +62,16 @@ public class UserService {
             userRepository.save(updatedUser);
             return new UserDTO(updatedUser.getName(), updatedUser.getEmail());
         }
+        throw new ObjectNotFoundException("Objeto não encontrado");
+    }
+
+    public PostsDTO findUsersPost(String id){
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isPresent()){
+            return new PostsDTO(optionalUser.get().getPosts());
+        }
+
         throw new ObjectNotFoundException("Objeto não encontrado");
     }
 }
