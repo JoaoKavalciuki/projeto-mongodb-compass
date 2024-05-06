@@ -43,4 +43,9 @@ public class UserService {
 
         return userRepository.insert(newUser);
     }
+
+    public void deleteUser(String id){
+        findById(id);
+        userRepository.deleteById(id);
+    }
 }
