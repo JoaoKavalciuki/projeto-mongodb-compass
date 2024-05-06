@@ -48,4 +48,17 @@ public class UserService {
         findById(id);
         userRepository.deleteById(id);
     }
+
+    public UserDTO updateUser(String id, UserDTO dto){
+        Optional<User> user = userRepository.findById(id);
+
+        if(user.isPresent()){
+            User updatedUser = user.get();
+            updatedUser.setEmail(dto.email());
+            updatedUser.setName(dto.name());
+
+            userRepository.save(updatedUser);
+        }
+        throw new ObjectNotFoundException("Objeto não encontrado");
+    }
 }
