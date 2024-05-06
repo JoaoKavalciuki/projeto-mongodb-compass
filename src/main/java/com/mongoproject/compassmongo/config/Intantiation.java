@@ -40,5 +40,10 @@ public class Intantiation implements CommandLineRunner {
 
         postRepository.deleteAll();
         postRepository.saveAll(Arrays.asList(post, post2, post3));
+
+        mary.getPosts().addAll(Arrays.asList(post, post2));
+        charles.getPosts().add(post3);
+        userRepository.saveAll(Arrays.asList(mary, charles));
+
     }
 }
