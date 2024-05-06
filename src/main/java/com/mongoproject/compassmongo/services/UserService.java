@@ -1,11 +1,14 @@
 package com.mongoproject.compassmongo.services;
 
 import com.mongoproject.compassmongo.domain.User;
+import com.mongoproject.compassmongo.dto.UserDTO;
 import com.mongoproject.compassmongo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -17,7 +20,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        var users = userRepository.findAll();
+        List<UserDTO> dtos = users.stream().map(user -> new UserDTO(user.getName(), user.getEmail())).toList();
+        return dtos;
+
     }
 }
