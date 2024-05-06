@@ -3,6 +3,7 @@ package com.mongoproject.compassmongo.config;
 import com.mongoproject.compassmongo.domain.Post;
 import com.mongoproject.compassmongo.domain.User;
 import com.mongoproject.compassmongo.dto.AuthorDTO;
+import com.mongoproject.compassmongo.dto.CommentDTO;
 import com.mongoproject.compassmongo.repositories.PostRepository;
 import com.mongoproject.compassmongo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class Intantiation implements CommandLineRunner {
         Post post = new Post(new AuthorDTO(mary.getId(), mary.getName()), format.parse("21/01/2024"), "Começando na UFRJ", "Hoje começo minha graduação na UFRJ");
         Post post2 = new Post(new AuthorDTO(mary.getId(), mary.getName()), format.parse("21/06/2024"), "Partiu ferias", "Partiu para Jericoacara");
         Post post3 = new Post(new AuthorDTO(charles.getId(), charles.getName()), format.parse("21/06/2024"), "Formei", "Hoje me formei na fatec");
+
+        CommentDTO comment = new CommentDTO("Como foi a viagem?", format.parse("27/06/2024"), new AuthorDTO(charles.getId(), charles.getName()));
+        CommentDTO comment2 = new CommentDTO("Parabens caraa", format.parse("22/01/2024"), new AuthorDTO(charles.getId(), charles.getName()));
+        CommentDTO comment3 = new CommentDTO("Boa viagem amiga ", format.parse("22/06/2024"), new AuthorDTO(charles.getId(), charles.getName()));
+
+        post2.getComments().addAll(Arrays.asList(comment, comment3));
+        post3.getComments().add(comment2);
 
         postRepository.deleteAll();
         postRepository.saveAll(Arrays.asList(post, post2, post3));
