@@ -1,8 +1,10 @@
 package com.mongoproject.compassmongo.controllers;
 
 import com.mongoproject.compassmongo.domain.User;
+import com.mongoproject.compassmongo.dto.UserDTO;
 import com.mongoproject.compassmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +25,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll(){
-        return userService.findAll();
+    public ResponseEntity<List<UserDTO>> findAll(){
+
+        return ResponseEntity.ok(userService.findAll());
     }
 }
