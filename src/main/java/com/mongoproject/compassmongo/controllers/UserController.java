@@ -1,6 +1,7 @@
 package com.mongoproject.compassmongo.controllers;
 
 import com.mongoproject.compassmongo.domain.User;
+import com.mongoproject.compassmongo.dto.PostsDTO;
 import com.mongoproject.compassmongo.dto.UserDTO;
 import com.mongoproject.compassmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,10 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         return ResponseEntity.ok(userService.findById(id));
+    }
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<PostsDTO> findUsersPost(@PathVariable String id){
+        return ResponseEntity.ok(userService.findUsersPost(id));
     }
 
     @DeleteMapping("/{id}")
