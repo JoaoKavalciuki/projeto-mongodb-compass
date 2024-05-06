@@ -58,6 +58,7 @@ public class UserService {
             updatedUser.setName(dto.name());
 
             userRepository.save(updatedUser);
+            return new UserDTO(updatedUser.getName(), updatedUser.getEmail());
         }
         throw new ObjectNotFoundException("Objeto não encontrado");
     }

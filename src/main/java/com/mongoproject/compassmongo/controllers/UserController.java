@@ -33,6 +33,12 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable String id, @RequestBody UserDTO dto){
+        userService.updateUser(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
 
@@ -49,5 +55,4 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
-
 }
