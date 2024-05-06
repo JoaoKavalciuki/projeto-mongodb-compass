@@ -1,6 +1,8 @@
 package com.mongoproject.compassmongo.controllers;
 
 import com.mongoproject.compassmongo.domain.User;
+import com.mongoproject.compassmongo.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,12 +15,15 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public List<User> findAll(){
-        User charles = new User("Charles", "charles1@gmail.com");
-        User mary = new User("Maria", "mary@gmail.com");
-        List<User> users = new ArrayList<>();
-        users.addAll(Arrays.asList(charles, mary));
-        return users;
+        return userService.findAll();
     }
 }
