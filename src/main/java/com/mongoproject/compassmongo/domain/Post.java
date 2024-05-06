@@ -1,5 +1,6 @@
 package com.mongoproject.compassmongo.domain;
 
+import com.mongoproject.compassmongo.dto.AuthorDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 public class Post implements Serializable {
     @Id
     private String id;
-    private User author;
+    private AuthorDTO author;
     private Date date;
     private String title;
     private String body;
@@ -21,7 +22,7 @@ public class Post implements Serializable {
 
     }
 
-    public Post(User author, Date date, String title, String body) {
+    public Post(AuthorDTO author, Date date, String title, String body) {
         this.author = author;
         this.date = date;
         this.title = title;
@@ -36,11 +37,11 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public User getAuthor() {
+    public AuthorDTO getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(AuthorDTO author) {
         this.author = author;
     }
 
