@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
-    @Query("{'author':  {$regex:  ?0, $options: 'i'}}")
+    @Query("{'author.name':  {$regex:  ?0, $options: 'i'}}")
     List<Post> searchByOwnerName(String name);
     List<Post> findByTitleContainingIgnoreCase(String title);
 }

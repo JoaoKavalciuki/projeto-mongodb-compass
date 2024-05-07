@@ -31,4 +31,9 @@ public class PostController {
         query = Util.decodeParam(query);
         return ResponseEntity.ok(postService.findByTitle(query));
     }
+    @GetMapping("/search")
+    public ResponseEntity<PostsDTO> findByAuthor(@RequestParam(name = "author", defaultValue = "") String query){
+        query = Util.decodeParam(query);
+        return ResponseEntity.ok(postService.findByAuthor(query));
+    }
 }
