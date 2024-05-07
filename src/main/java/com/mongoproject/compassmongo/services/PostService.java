@@ -11,6 +11,7 @@ import com.mongoproject.compassmongo.services.exceptions.ObjectNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,16 @@ public class PostService {
         if(posts.isEmpty()){
             throw new ObjectNotFoundException("Autor não existe ou não tem posts");
         }
+        return new PostsDTO(posts);
+    }
+    public PostsDTO fyndPostsBetweenDates(String query, Date minDate, Date maxDate){
+        maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+        List<Post> posts = postRepository.findBetweenDates(query, minDate, maxDate);
+
+        if(posts.isEmpty()){
+            throw new ObjectNotFoundException("Sem posts entre as datas especificadas");
+        }
+
         return new PostsDTO(posts);
     }
 
