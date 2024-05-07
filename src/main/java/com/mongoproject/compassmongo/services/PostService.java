@@ -43,4 +43,14 @@ public class PostService {
 
         return postsDTO;
     }
+
+    public PostsDTO findByAuthor(String name){
+        List<Post> posts = postRepository.searchByOwnerName(name);
+
+        if(posts.isEmpty()){
+            throw new ObjectNotFoundException("Autor não existe ou não tem posts");
+        }
+        return new PostsDTO(posts);
+    }
+
 }
