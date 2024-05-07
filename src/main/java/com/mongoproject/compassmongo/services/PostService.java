@@ -35,7 +35,10 @@ public class PostService {
     }
 
     public PostsDTO findByTitle(String title){
-        List<Post> posts = postRepository.findByTitleContaining(title);
+        List<Post> posts = postRepository.findByTitleContainingIgnoreCase(title);
+        if(posts.isEmpty()){
+            throw new ObjectNotFoundException("Não existe post com esse título");
+        }
         PostsDTO postsDTO = new PostsDTO(posts);
 
         return postsDTO;
