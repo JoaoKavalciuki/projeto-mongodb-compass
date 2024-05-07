@@ -1,6 +1,8 @@
 package com.mongoproject.compassmongo.controllers;
 
+import com.mongoproject.compassmongo.controllers.util.Util;
 import com.mongoproject.compassmongo.dto.PostDTO;
+import com.mongoproject.compassmongo.dto.PostsDTO;
 import com.mongoproject.compassmongo.dto.UserDTO;
 import com.mongoproject.compassmongo.services.PostService;
 import com.mongoproject.compassmongo.services.UserService;
@@ -22,5 +24,11 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDTO> findById(@PathVariable String id){
         return ResponseEntity.ok(postService.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<PostsDTO> findByTitle(@RequestParam(name = "title", defaultValue = "") String query){
+        query = Util.decodeParam(query);
+        return ResponseEntity.ok(postService.findByTitle(query));
     }
 }

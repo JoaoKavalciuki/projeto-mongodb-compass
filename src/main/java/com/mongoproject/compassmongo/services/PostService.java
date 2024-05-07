@@ -34,5 +34,13 @@ public class PostService {
         throw new ObjectNotFoundException("Objeto não encontrado");
     }
 
+    public PostsDTO findByTitle(String title){
+        List<Post> posts = postRepository.findByTitleContainingIgnoreCase(title);
+        if(posts.isEmpty()){
+            throw new ObjectNotFoundException("Não existe post com esse título");
+        }
+        PostsDTO postsDTO = new PostsDTO(posts);
 
+        return postsDTO;
+    }
 }
