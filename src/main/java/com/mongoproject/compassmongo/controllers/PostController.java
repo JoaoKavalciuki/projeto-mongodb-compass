@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -36,4 +38,16 @@ public class PostController {
         query = Util.decodeParam(query);
         return ResponseEntity.ok(postService.findByAuthor(query));
     }
+    @GetMapping("/date")
+    public ResponseEntity<PostsDTO> findBetweenDates(@RequestParam(name = "query", defaultValue = "") String query,
+                                                     @RequestParam(name = "minDate", defaultValue = "") String minDate,
+                                                     @RequestParam(name = "maxDate", defaultValue = "") String maxDate)
+    {
+        query = Util.decodeParam(query);
+        Date min = Util.converttDate(minDate, new Date(0L));
+        Date max = Util.converttDate(maxDate, new Date());
+        return ResponseEntity.ok(postService.fyndPostsBetweenDates(query, min, max));
+    }
+
+
 }
